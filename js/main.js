@@ -21,7 +21,8 @@ function moviePage() {
                 let director = data[i].director;
                 let poster = data[i].poster;
                 let actors = data[i].actors;
-                let plot= data[i].plot
+                let plot = data[i].plot
+                let id = data[i].id
 
                 card += `
                 <div class="col">
@@ -65,7 +66,11 @@ function moviePage() {
 
 moviePage().then()
 
-
+function deleteMovie(id) {
+    fetch(url + '/id', {
+        method: 'DELETE', headers: {'Content-Type': 'application/json'}
+    })
+}
 
 // ADDING NEW MOVIE
 
