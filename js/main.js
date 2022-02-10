@@ -1,6 +1,7 @@
 "use strict";
 
 let url = 'https://stellar-trusting-death.glitch.me/movies';
+
 // NEW CARD FUNCTION
 function newCard() {
 
@@ -19,7 +20,8 @@ function moviePage() {
                 let rating = data[i].rating;
                 let director = data[i].director;
                 let poster = data[i].poster;
-                let actors = data[i].actors
+                let actors = data[i].actors;
+                let plot= data[i].plot
 
                 card += `
                 <div class="col">
@@ -30,6 +32,7 @@ function moviePage() {
                     <p class="card-text">Rating: ${rating}</p>
                     <p class="card-text">Directed by: ${director}</p>
                     <p class="card-text">Starring: ${actors}</p>
+                    <p class="card-text">Plot: ${plot}</p>
                   </div>          
                 </div>                  
                 </div>
@@ -38,38 +41,35 @@ function moviePage() {
             }
             // Append cards to main container
             $('#movie-container').html(card)
-        })
-};
-
-moviePage().then(function () {
-    $("#add-movie").click(function () {
-        fetch(url, {
-            method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({
-                title: $("#movie-title").val(),
-                director: "",
-                year: "",
-                genre: "",
-                actors: "",
-                plot: "",
-                rating: $("input[name='rating']:checked").val(),
-                poster: ""
+        }).then(function () {
+            $("#add-movie").click(function (e) {
+                e.preventDefault()
+                fetch(url, {
+                    method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({
+                        title: $("#movie-title").val(),
+                        director: $("#movie-director").val(),
+                        year: $("#movie-year").val(),
+                        genre: $("#movie-genre").val(),
+                        actors: $("#movie-actor").val(),
+                        plot: $("#movie-plot").val(),
+                        rating: $("#movie-rating").val(),
+                        poster: $("#movie-img").val()
+                    })
+                })
+                    .then(response => response.json())
+                    .then(movie => console.log(movie))
+                    .catch(error => console.log(error))
             })
         })
-            .then(response => response.json())
-            .then($("#movie-container").append("") {
+}
 
-            }
-            .catch(error => console.log(error));
-    })
-})
-console.log(moviePage());
+moviePage().then()
+
 
 
 // ADDING NEW MOVIE
 
 
-
-
-    //
-    // let imageUrl = $("#movie-img").val();
-    // console.log(imageUrl)
+//
+// let imageUrl = $("#movie-img").val();
+// console.log(imageUrl)
