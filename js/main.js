@@ -35,10 +35,13 @@ function moviePage() {
                     <p class="card-text">Starring: ${actors}</p>
                     <p class="card-text">Plot: ${plot}</p>
                   </div>          
+                  <div class="card-footer text-muted">
+                        <input class="btn btn-primary" type="button" value="Delete" id="${id}"
+                        onclick="deleteMovie(id)">
+                  </div>
                 </div>                  
                 </div>
                 `
-
             }
             // Append cards to main container
             $('#movie-container').html(card)
@@ -67,7 +70,7 @@ function moviePage() {
 moviePage().then()
 
 function deleteMovie(id) {
-    fetch(url + '/id', {
+    fetch(`url/${id}`, {
         method: 'DELETE', headers: {'Content-Type': 'application/json'}
     })
 }
