@@ -1,18 +1,11 @@
 "use strict";
-
+// Glitch base url
 let url = 'https://stellar-trusting-death.glitch.me/movies';
-
-// NEW CARD FUNCTION
-function newCard() {
-
-}
 
 // DISPLAY MOVIE CARDS FROM GLITCH SERVER
 function moviePage() {
-    // Glitch url
     return fetch(url)
         .then(response => response.json())
-        // .then(data => console.log(data))
         .then(data => {
             let card = ""
             for (let i = 0; i < data.length; i++) {
@@ -74,10 +67,3 @@ function deleteMovie(id) {
         method: 'DELETE', headers: {'Content-Type': 'application/json'}
     })
 }
-
-// ADDING NEW MOVIE
-
-
-//
-// let imageUrl = $("#movie-img").val();
-// console.log(imageUrl)
