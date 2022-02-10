@@ -1,8 +1,8 @@
 "use strict";
 
-// Glitch url
 
 function moviePage() {
+    // Glitch url
     let url = 'https://stellar-trusting-death.glitch.me/movies'
     return fetch(url)
         .then(response => response.json())
@@ -18,7 +18,7 @@ function moviePage() {
 
                 card += `
                 <div class="col">
-                <div class="card">
+                <div class="card h-100">
                   <img src="${poster}" class="card-img-top" alt="...">
                   <div class="card-body">
                     <h5 class="card-title text-capitalize">${title}</h5>
@@ -29,11 +29,12 @@ function moviePage() {
                 </div>                  
                 </div>
                 `
-                
+
             }
             // Append cards to main container
             $('#movie-container').html(card)
         })
 }
+
 moviePage()
 console.log(moviePage());

@@ -13,8 +13,35 @@
     <title>Movie Project</title>
 </head>
 <body>
-
+<div class="collapse" id="navbarToggleExternalContent">
+    <div class="bg-dark p-4">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Image URL" aria-label="Title" aria-describedby="button-addon2">
+        </div>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Movie Title" aria-label="Title" aria-describedby="button-addon2">
+        </div>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Rating" aria-label="Title" aria-describedby="button-addon2">
+        </div>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Director" aria-label="Title" aria-describedby="button-addon2">
+        </div>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Actors" aria-label="Title" aria-describedby="button-addon2">
+        </div>
+        <input class="btn btn-primary" type="submit" value="Submit">
+    </div>
+</div>
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</nav>
 <div class="row row-cols-2 row-cols-md-4 g-4" id="movie-container">
+    <div class="loader"></div>
     <!-- Movie cards added here from JS -->
 </div>
 
