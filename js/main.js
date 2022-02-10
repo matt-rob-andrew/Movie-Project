@@ -1,9 +1,14 @@
 "use strict";
 
+let url = 'https://stellar-trusting-death.glitch.me/movies';
+// NEW CARD FUNCTION
+function newCard() {
 
+}
+
+// DISPLAY MOVIE CARDS FROM GLITCH SERVER
 function moviePage() {
     // Glitch url
-    let url = 'https://stellar-trusting-death.glitch.me/movies'
     return fetch(url)
         .then(response => response.json())
         // .then(data => console.log(data))
@@ -34,7 +39,37 @@ function moviePage() {
             // Append cards to main container
             $('#movie-container').html(card)
         })
-}
+};
 
-moviePage()
+moviePage().then(function () {
+    $("#add-movie").click(function () {
+        fetch(url, {
+            method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({
+                title: $("#movie-title").val(),
+                director: "",
+                year: "",
+                genre: "",
+                actors: "",
+                plot: "",
+                rating: $("input[name='rating']:checked").val(),
+                poster: ""
+            })
+        })
+            .then(response => response.json())
+            .then($("#movie-container").append("") {
+
+            }
+            .catch(error => console.log(error));
+    })
+})
 console.log(moviePage());
+
+
+// ADDING NEW MOVIE
+
+
+
+
+    //
+    // let imageUrl = $("#movie-img").val();
+    // console.log(imageUrl)
