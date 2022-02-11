@@ -30,8 +30,8 @@ function moviePage() {
                       </div>          
                       <div class="card-footer text-muted d-flex justify-content-between">
                             <input class="btn btn-primary" type="button" value="Delete" onclick="deleteMovie(${id})">
-                            <input class="btn btn-primary" type="button" value="Edit" onclick="editMovie(${id})">
-                            <div class="form-popup d-none" id="myForm">
+                            <input class="btn btn-primary" type="button" value="Edit" onclick="openForm(${id})">
+                            <div class="form-popup d-none" id="myForm${id}">
                                 <form class="form-container">
                                     <h1>Login</h1>
                                     
@@ -45,7 +45,7 @@ function moviePage() {
                                     <input type="text" value="${actors}" name="actors">
                                     
                                     <button type="submit" class="btn">Submit Edits</button>
-                                    <button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>
+                                    <button type="button" class="btn cancel" onclick="closeForm(${id})">Cancel</button>
                               </form>
                             </div> 
                       </div>
@@ -95,23 +95,24 @@ function deleteMovie(id) {
 }
 
 // EDITS MOVIE - need to add popup or something to edit each field
-function editMovie(id) {
-    return fetch(`${url}/${id}`, {
-        method: 'PATCH', headers: {'Content-Type': 'application/json'}
-    }).then(response => response.json())
-        .then(data=>{openForm()})
-    // .then(data => console.log(data))
-    // .then(() => {
-    //     window.location.reload()
-    // })
-}
+// function editMovie(id) {
+//     return fetch(`${url}/${id}`, {
+//         method: 'PATCH', headers: {'Content-Type': 'application/json'}
+//     }).then(response => response.json())
+//         .then(data=>{openForm()})
+//     // .then(data => console.log(data))
+//     // .then(() => {
+//     //     window.location.reload()
+//     // })
+// }
 
 // OPEN AND CLOSE EDIT FORM
-function openForm() {
-    $("#myForm").removeClass('d-none')
+function openForm(formId) {
+    console.log(formId);
+    $(`#myForm${formId}`).removeClass('d-none')
     .addClass('d-block');
 }
-function closeForm() {
-    $("#myForm").removeClass('d-block')
+function closeForm(formId) {
+    $(`#myForm${formId}`).removeClass('d-block')
     .addClass('d-none');
-} 
+}
