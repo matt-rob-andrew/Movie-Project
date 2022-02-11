@@ -38,11 +38,11 @@ function moviePage() {
                                     <label for="title"><b>Title</b></label>
                                     <input type="text" id="title${id}" value="${title}" name="title">
                                     <label for="rating"><b>Rating</b></label>
-                                    <input type="text" value="${rating}" name="rating">
+                                    <input type="text" id="rating${id}" value="${rating}" name="rating">
                                     <label for="director"><b>Director</b></label>
-                                    <input type="text" value="${director}" name="director">
+                                    <input type="text" id="director${id}" value="${director}" name="director">
                                     <label for="actors"><b>Actors</b></label>
-                                    <input type="text" value="${actors}" name="actors">
+                                    <input type="text" id="actors${id}" value="${actors}" name="actors">
                                     
                                     <button type="submit" class="btn" onclick="editMovie(${id})">Submit Edits</button>
                                     <button type="button" class="btn cancel" onclick="closeForm(${id})">Cancel</button>
@@ -55,7 +55,8 @@ function moviePage() {
             }
             // APPEND CARDS TO MAIN CONTAINER
             $('#movie-container').html(card)
-        }).then(function () {
+        })
+        .then(function () {
             // ADDS MOVIES TO THE PAGE AND DB
             $("#add-movie").click(function (e) {
                 e.preventDefault()
@@ -98,13 +99,16 @@ function deleteMovie(id) {
 function editMovie(id) {
     return fetch(`${url}/${id}`, {
         method: 'PATCH', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({
-            title: $("#title")
+            title: $("#title"+id).val(),
+            rating: $("#rating"+id).val(),
+            director: $("#director"+id).val(),
+            actors: $("#actors"+id).val(),
         })
     }).then(response => response.json())
-    // .then(data => console.log(data))
-    // .then(() => {
-    //     window.location.reload()
-    // })
+    .then(data => console.log(data))
+    .then(() => {
+        window.location.reload()
+    })
 }
 
 // OPEN AND CLOSE EDIT FORM
