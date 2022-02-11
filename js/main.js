@@ -28,8 +28,9 @@ function moviePage() {
                     <p class="card-text">Starring: ${actors}</p>
                     <p class="card-text">Plot: ${plot}</p>
                   </div>          
-                  <div class="card-footer text-muted">
+                  <div class="card-footer text-muted d-flex justify-content-between">
                         <input class="btn btn-primary" type="button" value="Delete" id="${id}" onclick="deleteMovie(this.id)">
+                        <input class="btn btn-primary" type="button" value="Edit" onclick="editMovie(this.id)">
                   </div>
                 </div>                  
                 </div>
@@ -75,3 +76,6 @@ function deleteMovie(id) {
         })
     }
 }
+
+// EDITS MOVIE
+function editMovie(id){}
