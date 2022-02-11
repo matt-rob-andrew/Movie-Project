@@ -29,8 +29,8 @@ function moviePage() {
                     <p class="card-text">Plot: ${plot}</p>
                   </div>          
                   <div class="card-footer text-muted d-flex justify-content-between">
-                        <input class="btn btn-primary" type="button" value="Delete" id="${id}" onclick="deleteMovie(this.id)">
-                        <input class="btn btn-primary" type="button" value="Edit" onclick="editMovie(this.id)">
+                        <input class="btn btn-primary" type="button" value="Delete" onclick="deleteMovie(${id})">
+                        <input class="btn btn-primary" type="button" value="Edit" onclick="editMovie(${id})">
                   </div>
                 </div>                  
                 </div>
