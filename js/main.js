@@ -38,6 +38,7 @@ function moviePage() {
             // APPEND CARDS TO MAIN CONTAINER
             $('#movie-container').html(card)
         }).then(function () {
+            // ADDS MOVIES TO THE PAGE AND DB
             $("#add-movie").click(function (e) {
                 e.preventDefault()
                 fetch(url, {
@@ -53,7 +54,9 @@ function moviePage() {
                     })
                 })
                     .then(response => response.json())
-                    .then(movie => console.log(movie))
+                    .then(() => {
+                        window.location.reload() // This reloads the entire page
+                    })
                     .catch(error => console.log(error))
             })
         })
