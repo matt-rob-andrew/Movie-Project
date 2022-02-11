@@ -81,7 +81,9 @@ function deleteMovie(id) {
 function editMovie(id) {
     return fetch(`${url}/${id}`, {
         method: 'PATCH', headers: {'Content-Type': 'application/json'}
-    }).then(() => {
-        window.location.reload()
-    })
+    }).then(response => response.json())
+        .then(data => console.log(data))
+        .then(() => {
+            window.location.reload()
+        })
 }
