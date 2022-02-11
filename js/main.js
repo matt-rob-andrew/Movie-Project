@@ -77,5 +77,11 @@ function deleteMovie(id) {
     }
 }
 
-// EDITS MOVIE
-function editMovie(id){}
+// EDITS MOVIE - need to add popup or something to edit each field
+function editMovie(id) {
+    return fetch(`${url}/${id}`, {
+        method: 'PATCH', headers: {'Content-Type': 'application/json'}
+    }).then(() => {
+        window.location.reload()
+    })
+}
