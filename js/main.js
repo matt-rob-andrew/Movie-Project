@@ -19,20 +19,34 @@ function moviePage() {
                 // POPULATES MAIN CONTAINER WITH MOVIE INFO
                 card += `
                 <div class="col">
-                <div class="card h-100">
-                  <img src="${poster}" class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title text-capitalize">${title}</h5>
-                    <p class="card-text">Rating: ${rating}</p>
-                    <p class="card-text">Directed by: ${director}</p>
-                    <p class="card-text">Starring: ${actors}</p>
-                    <p class="card-text">Plot: ${plot}</p>
-                  </div>          
-                  <div class="card-footer text-muted d-flex justify-content-between">
-                        <input class="btn btn-primary" type="button" value="Delete" onclick="deleteMovie(${id})">
-                        <input class="btn btn-primary" type="button" value="Edit" onclick="editMovie(${id})">
-                  </div>
-                </div>                  
+                    <div class="card h-100">
+                      <img src="${poster}" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title text-capitalize">${title}</h5>
+                        <p class="card-text">Rating: ${rating}</p>
+                        <p class="card-text">Directed by: ${director}</p>
+                        <p class="card-text">Starring: ${actors}</p>
+                        <p class="card-text">Plot: ${plot}</p>
+                      </div>          
+                      <div class="card-footer text-muted d-flex justify-content-between">
+                            <input class="btn btn-primary" type="button" value="Delete" onclick="deleteMovie(${id})">
+                            <input class="btn btn-primary" type="button" value="Edit" onclick="editMovie(${id})">
+                            <div class="form-popup d-none" id="myForm">
+                                <form class="form-container">
+                                    <h1>Login</h1>
+                                    
+                                    <label for="email"><b>Email</b></label>
+                                    <input type="text" placeholder="Enter Email" name="email">
+                            
+                                    <label for="psw"><b>Password</b></label>
+                                    <input type="text" placeholder="Enter Password" value ="${title}" name="psw" required>
+                            
+                                    <button type="submit" class="btn">Login</button>
+                                    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                              </form>
+                            </div> 
+                      </div>
+                    </div>                  
                 </div>
                 `
             }
@@ -82,8 +96,19 @@ function editMovie(id) {
     return fetch(`${url}/${id}`, {
         method: 'PATCH', headers: {'Content-Type': 'application/json'}
     }).then(response => response.json())
-        .then(data => console.log(data))
-        .then(() => {
-            window.location.reload()
-        })
+        .then(data=>{openForm()})
+    // .then(data => console.log(data))
+    // .then(() => {
+    //     window.location.reload()
+    // })
 }
+
+// OPEN AND CLOSE EDIT FORM
+function openForm() {
+    $("#myForm").removeClass('d-none')
+    .addClass('d-block');
+}
+function closeForm() {
+    $("#myForm").removeClass('d-block')
+    .addClass('d-none');
+} 
