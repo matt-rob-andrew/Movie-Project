@@ -35,14 +35,17 @@ function moviePage() {
                                 <form class="form-container">
                                     <h1>Login</h1>
                                     
-                                    <label for="email"><b>Email</b></label>
-                                    <input type="text" placeholder="Enter Email" name="email">
-                            
-                                    <label for="psw"><b>Password</b></label>
-                                    <input type="text" placeholder="Enter Password" value ="${title}" name="psw" required>
-                            
-                                    <button type="submit" class="btn">Login</button>
-                                    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                                    <label for="title"><b>Title</b></label>
+                                    <input type="text" value="${title}" name="title">
+                                    <label for="rating"><b>Rating</b></label>
+                                    <input type="text" value="${rating}" name="rating">
+                                    <label for="director"><b>Director</b></label>
+                                    <input type="text" value="${director}" name="director">
+                                    <label for="actors"><b>Actors</b></label>
+                                    <input type="text" value="${actors}" name="actors">
+                                    
+                                    <button type="submit" class="btn">Submit Edits</button>
+                                    <button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>
                               </form>
                             </div> 
                       </div>
