@@ -16,7 +16,7 @@ function moviePage() {
                 let actors = data[i].actors;
                 let plot = data[i].plot
                 let id = data[i].id
-
+                // POPULATES MAIN CONTAINER WITH MOVIE INFO
                 card += `
                 <div class="col">
                 <div class="card h-100">
@@ -29,14 +29,13 @@ function moviePage() {
                     <p class="card-text">Plot: ${plot}</p>
                   </div>          
                   <div class="card-footer text-muted">
-                        <input class="btn btn-primary" type="button" value="Delete" id="${id}"
-                        onclick="deleteMovie(id)">
+                        <input class="btn btn-primary" type="button" value="Delete" id="${id}" onclick="deleteMovie(this.id)">
                   </div>
                 </div>                  
                 </div>
                 `
             }
-            // Append cards to main container
+            // APPEND CARDS TO MAIN CONTAINER
             $('#movie-container').html(card)
         }).then(function () {
             $("#add-movie").click(function (e) {
@@ -62,8 +61,14 @@ function moviePage() {
 
 moviePage().then()
 
+// DELETES MOVIE FROM DB
 function deleteMovie(id) {
-    fetch(`url/${id}`, {
-        method: 'DELETE', headers: {'Content-Type': 'application/json'}
-    })
+    let confirmation = confirm(`Are you sure you want to delete this movie?`);
+    if (confirmation === true) {
+        return fetch(`${url}/${id}`, {
+            method: 'DELETE', headers: {'Content-Type': 'application/json'}
+        }).then(() => {
+            window.location.reload() // This reloads the entire page
+        })
+    }
 }
