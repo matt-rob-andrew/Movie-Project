@@ -36,7 +36,7 @@ function moviePage() {
                                     <h1>Login</h1>
                                     
                                     <label for="title"><b>Title</b></label>
-                                    <input type="text" value="${title}" name="title">
+                                    <input type="text" id="title${id}" value="${title}" name="title">
                                     <label for="rating"><b>Rating</b></label>
                                     <input type="text" value="${rating}" name="rating">
                                     <label for="director"><b>Director</b></label>
@@ -44,7 +44,7 @@ function moviePage() {
                                     <label for="actors"><b>Actors</b></label>
                                     <input type="text" value="${actors}" name="actors">
                                     
-                                    <button type="submit" class="btn">Submit Edits</button>
+                                    <button type="submit" class="btn" onclick="editMovie(${id})">Submit Edits</button>
                                     <button type="button" class="btn cancel" onclick="closeForm(${id})">Cancel</button>
                               </form>
                             </div> 
@@ -95,16 +95,17 @@ function deleteMovie(id) {
 }
 
 // EDITS MOVIE - need to add popup or something to edit each field
-// function editMovie(id) {
-//     return fetch(`${url}/${id}`, {
-//         method: 'PATCH', headers: {'Content-Type': 'application/json'}
-//     }).then(response => response.json())
-//         .then(data=>{openForm()})
-//     // .then(data => console.log(data))
-//     // .then(() => {
-//     //     window.location.reload()
-//     // })
-// }
+function editMovie(id) {
+    return fetch(`${url}/${id}`, {
+        method: 'PATCH', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({
+            title: $("#title")
+        })
+    }).then(response => response.json())
+    // .then(data => console.log(data))
+    // .then(() => {
+    //     window.location.reload()
+    // })
+}
 
 // OPEN AND CLOSE EDIT FORM
 function openForm(formId) {
