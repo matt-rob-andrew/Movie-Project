@@ -30,29 +30,33 @@ function moviePage() {
                                 <p class="card-text">Plot: ${plot}</p>
                             </div>
                             <div class="card-footer text-muted d-flex justify-content-between">
-                                <input class="btn btn-primary" type="button" value="Delete"
+                                <input class="btn btn-danger col-4 col-md-5" type="button" value="Delete"
                                        onclick="deleteMovie(${id})">
-                                <input class="btn btn-primary" type="button" value="Edit" onclick="openForm(${id})">
-                                <div class="form-popup d-none" id="myForm${id}">
-                                    <form class="form-container">
-                                        <h1>Login</h1>
+                                <input class="btn btn-primary col-4 col-md-5" type="button" value="Edit"
+                                       onclick="openForm(${id})">
 
-                                        <label for="title"><b>Title</b></label>
-                                        <input type="text" id="title${id}" value="${title}" name="title">
-                                        <label for="rating"><b>Rating</b></label>
-                                        <input type="text" id="rating${id}" value="${rating}" name="rating">
-                                        <label for="director"><b>Director</b></label>
-                                        <input type="text" id="director${id}" value="${director}" name="director">
-                                        <label for="actors"><b>Actors</b></label>
-                                        <input type="text" id="actors${id}" value="${actors}" name="actors">
-
-                                        <button type="button" class="btn" onclick="editMovie(${id})">Submit Edits
-                                        </button>
-                                        <button type="button" class="btn cancel" onclick="closeForm(${id})">Cancel
-                                        </button>
-                                    </form>
-                                </div>
                             </div>
+
+                        </div>
+                        <div class="form-popup d-none" id="myForm${id}">
+                            <form class="form-container">
+                                <h1 class="text-center">Edit Movie</h1>
+                                <label for="title"><b>Title</b></label>
+                                <input type="text" id="title${id}" value="${title}" class="text-capitalize"
+                                       name="title">
+                                <label for="rating"><b>Rating</b></label>
+                                <input type="text" id="rating${id}" value="${rating}" name="rating">
+                                <label for="director"><b>Director</b></label>
+                                <input type="text" id="director${id}" value="${director}" class="text-capitalize"
+                                       name="director">
+                                <label for="actors"><b>Actors</b></label>
+                                <input type="text" id="actors${id}" value="${actors}" class="text-capitalize"
+                                       name="actors">
+                                <button type="button" class="btn" onclick="editMovie(${id})">Submit Edits
+                                </button>
+                                <button type="button" class="btn cancel" onclick="closeForm(${id})">Cancel
+                                </button>
+                            </form>
                         </div>
                     </div>
                 `
@@ -99,7 +103,7 @@ function deleteMovie(id) {
     }
 }
 
-// EDITS MOVIE - need to add popup or something to edit each field
+// EDITS MOVIE
 function editMovie(id) {
     return fetch(`${url}/${id}`, {
         method: 'PATCH', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({
@@ -111,17 +115,18 @@ function editMovie(id) {
     }).then(response => response.json())
         // .then(data => console.log(data))
         .then(() => {
-            window.location.reload()
+            window.location.reload() // This reloads the entire page
         })
 }
 
-// OPEN AND CLOSE EDIT FORM
+// OPEN EDIT FORM - ATTACHED TO 'EDIT' BUTTON
 function openForm(formId) {
     console.log(formId);
     $(`#myForm${formId}`).removeClass('d-none')
         .addClass('d-block');
 }
 
+// CLOSE EDIT FORM - ATTACHED TO 'CANCEL' BUTTON
 function closeForm(formId) {
     $(`#myForm${formId}`).removeClass('d-block')
         .addClass('d-none');
