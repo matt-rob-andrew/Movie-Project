@@ -17,40 +17,44 @@ function moviePage() {
                 let plot = data[i].plot
                 let id = data[i].id
                 // POPULATES MAIN CONTAINER WITH MOVIE INFO
+                //language=HTML
                 card += `
-                <div class="col">
-                    <div class="card h-100">
-                      <img src="${poster}" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title text-capitalize">${title}</h5>
-                        <p class="card-text">Rating: ${rating}</p>
-                        <p class="card-text">Directed by: ${director}</p>
-                        <p class="card-text">Starring: ${actors}</p>
-                        <p class="card-text">Plot: ${plot}</p>
-                      </div>          
-                      <div class="card-footer text-muted d-flex justify-content-between">
-                            <input class="btn btn-primary" type="button" value="Delete" onclick="deleteMovie(${id})">
-                            <input class="btn btn-primary" type="button" value="Edit" onclick="openForm(${id})">
-                            <div class="form-popup d-none" id="myForm${id}">
-                                <form class="form-container">
-                                    <h1>Login</h1>
-                                    
-                                    <label for="title"><b>Title</b></label>
-                                    <input type="text" id="title${id}" value="${title}" name="title">
-                                    <label for="rating"><b>Rating</b></label>
-                                    <input type="text" id="rating${id}" value="${rating}" name="rating">
-                                    <label for="director"><b>Director</b></label>
-                                    <input type="text" id="director${id}" value="${director}" name="director">
-                                    <label for="actors"><b>Actors</b></label>
-                                    <input type="text" id="actors${id}" value="${actors}" name="actors">
-                                    
-                                    <button type="submit" class="btn" onclick="editMovie(${id})">Submit Edits</button>
-                                    <button type="button" class="btn cancel" onclick="closeForm(${id})">Cancel</button>
-                              </form>
-                            </div> 
-                      </div>
-                    </div>                  
-                </div>
+                    <div class="col">
+                        <div class="card h-100">
+                            <img src="${poster}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title text-capitalize">${title}</h5>
+                                <p class="card-text">Rating: ${rating}</p>
+                                <p class="card-text">Directed by: ${director}</p>
+                                <p class="card-text">Starring: ${actors}</p>
+                                <p class="card-text">Plot: ${plot}</p>
+                            </div>
+                            <div class="card-footer text-muted d-flex justify-content-between">
+                                <input class="btn btn-primary" type="button" value="Delete"
+                                       onclick="deleteMovie(${id})">
+                                <input class="btn btn-primary" type="button" value="Edit" onclick="openForm(${id})">
+                                <div class="form-popup d-none" id="myForm${id}">
+                                    <form class="form-container">
+                                        <h1>Login</h1>
+
+                                        <label for="title"><b>Title</b></label>
+                                        <input type="text" id="title${id}" value="${title}" name="title">
+                                        <label for="rating"><b>Rating</b></label>
+                                        <input type="text" id="rating${id}" value="${rating}" name="rating">
+                                        <label for="director"><b>Director</b></label>
+                                        <input type="text" id="director${id}" value="${director}" name="director">
+                                        <label for="actors"><b>Actors</b></label>
+                                        <input type="text" id="actors${id}" value="${actors}" name="actors">
+
+                                        <button type="button" class="btn" onclick="editMovie(${id})">Submit Edits
+                                        </button>
+                                        <button type="button" class="btn cancel" onclick="closeForm(${id})">Cancel
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 `
             }
             // APPEND CARDS TO MAIN CONTAINER
@@ -99,25 +103,26 @@ function deleteMovie(id) {
 function editMovie(id) {
     return fetch(`${url}/${id}`, {
         method: 'PATCH', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({
-            title: $("#title"+id).val(),
-            rating: $("#rating"+id).val(),
-            director: $("#director"+id).val(),
-            actors: $("#actors"+id).val(),
+            title: $("#title" + id).val(),
+            rating: $("#rating" + id).val(),
+            director: $("#director" + id).val(),
+            actors: $("#actors" + id).val(),
         })
     }).then(response => response.json())
-    .then(data => console.log(data))
-    .then(() => {
-        window.location.reload()
-    })
+        // .then(data => console.log(data))
+        .then(() => {
+            window.location.reload()
+        })
 }
 
 // OPEN AND CLOSE EDIT FORM
 function openForm(formId) {
     console.log(formId);
     $(`#myForm${formId}`).removeClass('d-none')
-    .addClass('d-block');
+        .addClass('d-block');
 }
+
 function closeForm(formId) {
     $(`#myForm${formId}`).removeClass('d-block')
-    .addClass('d-none');
+        .addClass('d-none');
 }
