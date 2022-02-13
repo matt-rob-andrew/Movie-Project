@@ -93,6 +93,7 @@ moviePage().then()
 
 // DELETES MOVIE FROM DB
 function deleteMovie(id) {
+    $('.card').addClass('blur')
     let confirmation = confirm(`Are you sure you want to delete this movie?`);
     if (confirmation === true) {
         return fetch(`${url}/${id}`, {
@@ -101,6 +102,7 @@ function deleteMovie(id) {
             window.location.reload() // This reloads the entire page
         })
     }
+    $('.card').removeClass('blur')
 }
 
 // EDITS MOVIE
@@ -122,12 +124,14 @@ function editMovie(id) {
 // OPEN EDIT FORM - ATTACHED TO 'EDIT' BUTTON
 function openForm(formId) {
     console.log(formId);
+    $('.card').addClass('blur')
     $(`#myForm${formId}`).removeClass('d-none')
         .addClass('d-block');
 }
 
 // CLOSE EDIT FORM - ATTACHED TO 'CANCEL' BUTTON
 function closeForm(formId) {
+    $('.card').removeClass('blur')
     $(`#myForm${formId}`).removeClass('d-block')
         .addClass('d-none');
 }

@@ -107,3 +107,6 @@
     opacity: 1;
 }
 
+.blur {
+    filter: blur(2px);
+}
