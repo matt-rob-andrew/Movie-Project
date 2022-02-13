@@ -2,6 +2,10 @@
 // Glitch base url
 let url = 'https://stellar-trusting-death.glitch.me/movies';
 
+// OMDB url
+let omdbUrl = `https://www.omdbapi.com/?`
+
+
 // DISPLAY MOVIE CARDS FROM GLITCH SERVER
 function moviePage() {
     return fetch(url)
@@ -135,3 +139,10 @@ function closeForm(formId) {
     $(`#myForm${formId}`).removeClass('d-block')
         .addClass('d-none');
 }
+
+fetch(`${omdbUrl}t=batman&apikey=${OMDB_KEY}`).then(
+    response => response.json())
+    .then(data => console.log(data))
+
+
+
