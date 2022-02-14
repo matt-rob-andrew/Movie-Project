@@ -8,7 +8,7 @@ let omdbUrl = `https://www.omdbapi.com/?`
 
 // DISPLAY MOVIE CARDS FROM GLITCH SERVER
 function moviePage() {
-    return fetch(url)
+    fetch(url)
         .then(response => response.json())
         .then(data => {
             let card = ""
@@ -67,7 +67,7 @@ function moviePage() {
             }
             // APPEND CARDS TO MAIN CONTAINER
             $('#movie-container').html(card)
-        }).then(()=> {
+        }).then(() => {
             let newTitle = $('#movie-title').val()
             fetch(`${omdbUrl}t=${newTitle}&apikey=${OMDB_KEY}`).then(
                 response => response.json())
@@ -83,7 +83,7 @@ function moviePage() {
                                 year: data.Year,
                                 genre: data.Genre,
                                 actors: data.Actors,
-                                plot:data.Plot,
+                                plot: data.Plot,
                                 rating: data.Ratings[0].Value,
                                 poster: data.Poster
                             })
@@ -96,10 +96,10 @@ function moviePage() {
                     })
                 })
         })
-        
+
 }
 
-moviePage().then()
+moviePage()
 
 // DELETES MOVIE FROM DB
 function deleteMovie(id) {
