@@ -67,6 +67,11 @@ function moviePage() {
             }
             // APPEND CARDS TO MAIN CONTAINER
             $('#movie-container').html(card)
+        }).then(()=> {
+            let newTitle = $('#movie-title').val()
+            fetch(`${omdbUrl}t=${newTitle}&apikey=${OMDB_KEY}`).then(
+                response => response.json())
+                .then(data => console.log(data))
         })
         .then(function () {
             // ADDS MOVIES TO THE PAGE AND DB
@@ -140,9 +145,6 @@ function closeForm(formId) {
         .addClass('d-none');
 }
 
-fetch(`${omdbUrl}t=batman&apikey=${OMDB_KEY}`).then(
-    response => response.json())
-    .then(data => console.log(data))
 
 
 
