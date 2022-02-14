@@ -71,31 +71,32 @@ function moviePage() {
             let newTitle = $('#movie-title').val()
             fetch(`${omdbUrl}t=${newTitle}&apikey=${OMDB_KEY}`).then(
                 response => response.json())
-                .then(data => console.log(data))
-        })
-        .then(function () {
-            // ADDS MOVIES TO THE PAGE AND DB
-            $("#add-movie").click(function (e) {
-                e.preventDefault()
-                fetch(url, {
-                    method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({
-                        title: $("#movie-title").val(),
-                        director: $("#movie-director").val(),
-                        year: $("#movie-year").val(),
-                        genre: $("#movie-genre").val(),
-                        actors: $("#movie-actor").val(),
-                        plot: $("#movie-plot").val(),
-                        rating: $("#movie-rating").val(),
-                        poster: $("#movie-img").val()
+                // .then(data => console.log(data))
+                .then(data => {
+                    // ADDS MOVIES TO THE PAGE AND DB
+                    $("#add-movie").click(function (e) {
+                        e.preventDefault()
+                        fetch(url, {
+                            method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({
+                                title: data.Title,
+                                director: data.Director,
+                                year: data.Year,
+                                genre: data.Genre,
+                                actors: data.Actors,
+                                plot:data.Plot,
+                                rating: data.Ratings[0].Value,
+                                poster: data.Poster
+                            })
+                        })
+                            .then(response => response.json())
+                            .then(() => {
+                                window.location.reload() // This reloads the entire page
+                            })
+                            .catch(error => console.log(error))
                     })
                 })
-                    .then(response => response.json())
-                    .then(() => {
-                        window.location.reload() // This reloads the entire page
-                    })
-                    .catch(error => console.log(error))
-            })
         })
+        
 }
 
 moviePage().then()
